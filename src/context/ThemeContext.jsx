@@ -26,8 +26,8 @@ export function ThemeModeProvider({ children }) {
                     },
                 },
                 typography: {
-                    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-                },
+                    fontFamily: '"Inter", "Roboto", sans-serif',
+                }
             }),
         [darkMode]
     );

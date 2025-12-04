@@ -473,7 +473,7 @@ export default function Home() {
           {/* NEWS */}
           <Box sx={{ mb: { xs: 8, md: 12 } }}>
             <Typography variant="h5" sx={{ fontWeight: 800, mb: 3 }}>
-              News & Announcements
+              Tin Tức | Sự Kiện
             </Typography>
 
             <Grid container spacing={4}>

@@ -27,6 +27,7 @@ import { useThemeMode } from "../context/ThemeContext";
 
 
 import { Link as RouterLink } from "react-router-dom";
+import MenuButton from "./Menubutton";
 
 export default function Header() {
     const theme = useTheme();
@@ -114,6 +115,65 @@ export default function Header() {
                             Sign In
                         </Button>
                     </Box>
+
+                    {/* NAVIGATION WITH DROPDOWNS */}
+                    <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1, alignItems: "center" }}>
+                        {/* Trang Chủ */}
+                        <Button component={RouterLink} to="/" color="inherit">
+                            Trang chủ
+                        </Button>
+
+                        {/* Giới thiệu dropdown */}
+                        <MenuButton
+                            title="Giới thiệu"
+                            items={[
+                                { label: "Tầm nhìn & Sứ mệnh", to: "/gioi-thieu/tam-nhin" },
+                                { label: "Cơ cấu tổ chức", to: "/gioi-thieu/co-cau" },
+                                { label: "Lịch sử hình thành", to: "/gioi-thieu/lich-su" },
+                            ]}
+                        />
+
+                        {/* Tra cứu dropdown */}
+                        <MenuButton
+                            title="Tra cứu"
+                            items={[
+                                { label: "Tra cứu tài liệu", to: "/tra-cuu/tai-lieu" },
+                                { label: "Mục lục sách", to: "/tra-cuu/muc-luc" },
+                                { label: "Tra cứu nâng cao", to: "/tra-cuu/nang-cao" },
+                            ]}
+                        />
+
+                        {/* Sản phẩm */}
+                        <Button component={RouterLink} to="/san-pham" color="inherit">
+                            Sản phẩm
+                        </Button>
+
+                        {/* Dịch vụ dropdown */}
+                        <MenuButton
+                            title="Dịch vụ"
+                            items={[
+                                { label: "Dịch vụ mượn sách", to: "/dich-vu/muon-sach" },
+                                { label: "Phòng đọc", to: "/dich-vu/phong-doc" },
+                                { label: "Hỗ trợ học tập", to: "/dich-vu/ho-tro" },
+                            ]}
+                        />
+
+                        {/* Hỗ trợ dropdown */}
+                        <MenuButton
+                            title="Hỗ trợ"
+                            items={[
+                                { label: "Hỏi đáp", to: "/ho-tro/faq" },
+                                { label: "Hướng dẫn sử dụng", to: "/ho-tro/huong-dan" },
+                                { label: "Tài nguyên khác", to: "/ho-tro/tai-nguyen" },
+                            ]}
+                        />
+
+                        {/* Liên hệ */}
+                        <Button component={RouterLink} to="/lien-he" color="inherit">
+                            Liên hệ
+                        </Button>
+                    </Box>
+
 
                     <IconButton
                         onClick={() => setDarkMode(!darkMode)}
