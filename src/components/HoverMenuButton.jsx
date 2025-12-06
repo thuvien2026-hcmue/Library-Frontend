@@ -3,27 +3,28 @@ import { Button, Menu, MenuItem, alpha } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
 export default function HoverMenuButton({ title, items }) {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+    const [open, setOpen] = useState(false);
+    const anchorRef = useRef(null);
+    const closeTimer = useRef(null);
 
-    const buttonRef = useRef(null);
-
-    const handleOpen = (e) => {
-        setAnchorEl(buttonRef.current);
+    const handleOpen = () => {
+        clearTimeout(closeTimer.current);
+        setOpen(true);
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
+    const delayedClose = () => {
+        clearTimeout(closeTimer.current);
+        closeTimer.current = setTimeout(() => setOpen(false), 120);
     };
 
     return (
         <div
             onMouseEnter={handleOpen}
-            onMouseLeave={handleClose}
+            onMouseLeave={delayedClose}
             style={{ display: "inline-block" }}
         >
             <Button
-                ref={buttonRef}
+                ref={anchorRef}
                 color="inherit"
                 sx={{
                     textTransform: "none",
@@ -31,9 +32,8 @@ export default function HoverMenuButton({ title, items }) {
                     fontWeight: 500,
                     px: 1.5,
                     py: 1.2,
-                    transition: "all 0.15s ease",
                     "&:hover": {
-                        bgcolor: (theme) => alpha(theme.palette.text.primary, 0.06),
+                        bgcolor: (theme) => alpha(theme.palette.text.primary, 0),
                     },
                 }}
             >
@@ -41,20 +41,29 @@ export default function HoverMenuButton({ title, items }) {
             </Button>
 
             <Menu
-                anchorEl={anchorEl}
+                anchorEl={anchorRef.current}
                 open={open}
-                transitionDuration={140}
-                onClose={handleClose}
+                onClose={delayedClose}
+
+                // 🔥 REQUIRED so the menu doesn't reopen or get stuck
+                disableAutoFocus
+                disableAutoFocusItem
+                disableRestoreFocus
+
                 MenuListProps={{
-                    onMouseEnter: handleOpen,  // Keep menu open when hovering inside
-                    onMouseLeave: handleClose, // Close when leaving menu
+                    onMouseEnter: handleOpen,
+                    onMouseLeave: delayedClose,
+                    sx: { py: 0.5 }
                 }}
+
                 PaperProps={{
+                    onMouseLeave: delayedClose,   // 🔥 Key fix: close when mouse leaves the submenu
                     elevation: 4,
                     sx: {
+                        zIndex: 2000,
                         borderRadius: 0,
                         mt: 1,
-                        minWidth: 200,
+                        minWidth: 220,
                         animation: "fadeIn 0.15s ease-out",
                         "@keyframes fadeIn": {
                             from: { opacity: 0, transform: "translateY(-5px)" },
@@ -62,6 +71,7 @@ export default function HoverMenuButton({ title, items }) {
                         },
                     },
                 }}
+
                 anchorOrigin={{
                     vertical: "bottom",
                     horizontal: "left",
@@ -76,18 +86,16 @@ export default function HoverMenuButton({ title, items }) {
                         key={index}
                         component={RouterLink}
                         to={item.to}
+                        onClick={() => setOpen(false)}
                         sx={{
                             fontSize: "15px",
                             py: 1.2,
                             px: 2,
-                            transition: "all 0.15s ease",
                             "&:hover": {
                                 bgcolor: (theme) =>
                                     alpha(theme.palette.primary.main, 0.1),
-                                pl: 2.4, // Slight slide effect
                             },
                         }}
-                        onClick={handleClose}
                     >
                         {item.label}
                     </MenuItem>

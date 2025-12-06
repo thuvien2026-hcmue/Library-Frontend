@@ -33,6 +33,7 @@ import HoverMenuButton from "./HoverMenuButton";
 
 export default function Header() {
     const theme = useTheme();
+    
     const [open, setOpen] = useState(false);
     const { darkMode, setDarkMode } = useThemeMode();
     const [openIntro, setOpenIntro] = useState(false);
@@ -64,10 +65,11 @@ export default function Header() {
                 color="default"
                 elevation={scrolled ? 6 : 0}
                 sx={{
+                    zIndex: (theme) => theme.zIndex.drawer + 10,
                     backdropFilter: "blur(10px)",
                     bgcolor: theme.palette.background.paper,
                     transition: "all 0.25s ease",
-                    py: scrolled ? 0.2 : 1,
+                    py: 1,
                 }}
             >
                 <Toolbar
@@ -138,18 +140,19 @@ export default function Header() {
                         <HoverMenuButton
                             title="Giới thiệu"
                             items={[
-                                { label: "Tầm nhìn & Sứ mệnh", to: "/gioi-thieu/tam-nhin" },
+                                { label: "Giới thiêu chung", to: "/gioi-thieu/gioi-thieu" },
                                 { label: "Cơ cấu tổ chức", to: "/gioi-thieu/co-cau" },
-                                { label: "Lịch sử hình thành", to: "/gioi-thieu/lich-su" },
+                                { label: "Chức năng nhiệm vụ", to: "/gioi-thieu/chuc-nang" },
+                                { label: "Nội quy thư viện", to: "/gioi-thieu/noi-quy" },
                             ]}
                         />
 
                         <HoverMenuButton
                             title="Tra cứu"
                             items={[
-                                { label: "Tra cứu tài liệu", to: "/tra-cuu/tai-lieu" },
-                                { label: "Mục lục sách", to: "/tra-cuu/muc-luc" },
-                                { label: "Tra cứu nâng cao", to: "/tra-cuu/nang-cao" },
+                                { label: "Mục lục trực tuyến", to: "/tra-cuu/muc-luc" },
+                                { label: "Thư viện số", to: "/tra-cuu/thu-vien-so" },
+                                { label: "Tìm kiếm tập trung", to: "/tra-cuu/nang-cao" },
                             ]}
                         />
 
@@ -158,18 +161,22 @@ export default function Header() {
                         <HoverMenuButton
                             title="Dịch vụ"
                             items={[
-                                { label: "Dịch vụ mượn sách", to: "/dich-vu/muon-sach" },
-                                { label: "Phòng đọc", to: "/dich-vu/phong-doc" },
-                                { label: "Hỗ trợ học tập", to: "/dich-vu/ho-tro" },
+                                { label: "Mượn đọc tại chỗ", to: "/dich-vu/muon-sach" },
+                                { label: "Mượn sách về nhà", to: "/dich-vu/phong-doc" },
+                                { label: "Cung cấp phòng học nhóm", to: "/dich-vu/ho-tro" },
+                                { label: "Tư vấn thông tin", to: "/dich-vu/phong-doc" },
+                                { label: "Cung cấp thông tin - tài liệu theo yêu cầu", to: "/dich-vu/ho-tro" },
                             ]}
                         />
 
                         <HoverMenuButton
                             title="Hỗ trợ"
                             items={[
-                                { label: "Hỏi đáp", to: "/ho-tro/faq" },
-                                { label: "Hướng dẫn sử dụng", to: "/ho-tro/huong-dan" },
-                                { label: "Tài nguyên khác", to: "/ho-tro/tai-nguyen" },
+                                { label: "Phản hồi góp ý", to: "/ho-tro/faq" },
+                                { label: "Đề nghị mua tài liệu", to: "/ho-tro/huong-dan" },
+                                { label: "Yêu cầu di chuyển tài liệu", to: "/ho-tro/tai-nguyen" },
+                                { label: "Cẩm nang hướng dẫn", to: "/ho-tro/huong-dan" },
+                                { label: "Hướng dẫn sử dụng", to: "/ho-tro/tai-nguyen" },
                             ]}
                         />
 
