@@ -1,5 +1,6 @@
 // Home.jsx
 import React, { useMemo, useState } from "react";
+import { Helmet } from "react-helmet";
 import {
   Container,
   Grid,
@@ -28,6 +29,7 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 
 import BookCard from "../components/Bookcard";
 import sampleBooks from "../sample-data/sampleBooks";
+import BGImage from "../assets/image/bg_img.jpg";
 import AD1 from "../assets/image/advert_1.jpg";
 import AD2 from "../assets/image/advert_2.jpg";
 import AD3 from "../assets/image/advert_3.jpg";
@@ -35,27 +37,25 @@ import Contact1 from "../assets/image/contact_1.gif";
 import Contact2 from "../assets/image/contact_2.jpg";
 import Contact3 from "../assets/image/contact_3.jpg";
 import Contact4 from "../assets/image/contact_4.jpg";
+import img01 from "../assets/image/camera/img_1.jpg";
+import img02 from "../assets/image/camera/img_2.jpg";
+import img03 from "../assets/image/camera/img_3.jpg";
+import img04 from "../assets/image/camera/img_4.jpg";
+import img05 from "../assets/image/camera/img_5.jpg";
+import img06 from "../assets/image/camera/img_6.jpg";
+import img07 from "../assets/image/camera/img_7.jpg";
+import img08 from "../assets/image/camera/img_8.jpg";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
+import "swiper/css/effect-cube";
+import { EffectCube } from "swiper/modules";
 import Chatbot from "../components/Chatbot";
 
 export default function Home() {
-
-  // Static data (you already had these — kept same shape)
-  const categories = [
-    { name: "Computer Science", icon: <LibraryBooksIcon /> },
-    { name: "Engineering", icon: <LibraryBooksIcon /> },
-    { name: "Literature", icon: <LibraryBooksIcon /> },
-    { name: "Medicine", icon: <LibraryBooksIcon /> },
-    { name: "Business", icon: <LibraryBooksIcon /> },
-    { name: "History", icon: <LibraryBooksIcon /> },
-    { name: "Psychology", icon: <LibraryBooksIcon /> },
-    { name: "Mathematics", icon: <LibraryBooksIcon /> },
-  ];
 
   const news = [
     {
@@ -116,24 +116,25 @@ export default function Home() {
   ];
   const links = [
     {
-      title: "Trang chủ",
-      url: "https://example.com/home",
+      url: "https://stinet.gov.vn/",
+      image_url: Contact1,
     },
     {
-      title: "Liên hệ",
-      url: "https://example.com/contact",
+      url: "https://hub.idk.org.vn/",
+      image_url: Contact2,
     },
     {
-      title: "Hỗ trợ khách hàng",
-      url: "https://example.com/support",
+      url: "https://www.vnulib.edu.vn/",
+      image_url: Contact3,
+    },
+    {
+      url: "https://lrc.ctu.edu.vn/",
+      image_url: Contact4,
     },
   ];
 
-  // motion variants (reusable)
-  const fadeInUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
-  const hoverGrow = { whileHover: { scale: 1.03 }, transition: { type: "spring", stiffness: 300 } };
-
   return (
+
     <Box
       component="main"
       sx={{
@@ -142,6 +143,9 @@ export default function Home() {
         pb: { xs: 8, md: 12 },
       }}
     >
+      <Helmet>
+        <title>Trang Chủ | HCMUE</title>
+      </Helmet>
       <Chatbot />
       <Grid container alignItems="center" sx={{ width: "100%", mb: { xs: 2, md: 3 }, mt: { xs: 6, md: 10 } }}>
         <Grid item xs={12} md={6}>
@@ -153,7 +157,14 @@ export default function Home() {
             }}
           >
             <Swiper
-              modules={[Autoplay, Pagination]}
+              modules={[Autoplay, Pagination, EffectCube]}
+              effect="cube"
+              grabCursor={true}
+              cubeEffect={{
+                shadow: true,
+                shadowOffset: 40,
+                shadowScale: 0.94,
+              }}
               slidesPerView={1}
               loop
               pagination={{
@@ -165,29 +176,17 @@ export default function Home() {
             >
               {[AD1, AD2, AD3].map((src, i) => (
                 <SwiperSlide key={i}>
-                  <motion.div
-                    initial={{ scale: 1.06 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 1.6 }}
-                    style={{
+                  <Box
+                    component="img"
+                    src={src}
+                    alt={`slide-${i}`}
+                    sx={{
                       width: "100%",
-                      height: "100%",
-                      overflow: "hidden",
-                      borderRadius: 0,
+                      objectFit: "cover",
+                      display: "block",
+                      height: { xs: 250, sm: 300, md: 500 },
                     }}
-                  >
-                    <Box
-                      component="img"
-                      src={src}
-                      alt={`slide-${i}`}
-                      sx={{
-                        width: "100%",
-                        objectFit: "cover",
-                        display: "block",
-                        height: { xs: 250, sm: 300, md: 500 },
-                      }}
-                    />
-                  </motion.div>
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -353,17 +352,20 @@ export default function Home() {
             }}
             style={{ width: "100%" }}
           >
-            {[Contact1, Contact2, Contact3, Contact4].map((logo, i) => (
+            {links.map((item, i) => (
               <SwiperSlide key={i}>
                 <Box
                   component="img"
-                  src={logo}
+                  src={item.image_url}
+                  alt={item.title}
                   sx={{
                     width: "100%",
                     height: 90,
                     objectFit: "contain",
                     filter: "brightness(1)",
+                    cursor: "pointer"
                   }}
+                  onClick={() => window.open(item.url, "_blank")}
                 />
               </SwiperSlide>
             ))}
@@ -465,153 +467,58 @@ export default function Home() {
 
         </Box>
 
-        {/* CATEGORIES */}
-        <Box sx={{ mb: { xs: 8, md: 12 } }}>
-          <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
-            <Grid item>
-              <Typography variant="h5" sx={{ fontWeight: 800 }}>
-                Browse by Category
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Discover by subject area.
-              </Typography>
-            </Grid>
-          </Grid>
-
-          <Swiper
-            slidesPerView={3}
-            spaceBetween={14}
-            slidesOffsetBefore={20} // padding left
-            slidesOffsetAfter={20}  // padding right
-            breakpoints={{
-              600: { slidesPerView: 4 },
-              960: { slidesPerView: 6 },
-            }}
-          >
-            {categories.map((c, i) => (
-              <SwiperSlide key={i}>
-                <Box sx={{ px: 2, py: 1, bgcolor: "#f5f5f5", borderRadius: 2 }}> {/* internal padding inside slide */}
-                  <Tooltip title={`Explore ${c.name}`}>
-                    <Chip
-                      label={c.name}
-                      icon={c.icon}
-                      clickable
-                      sx={{
-                        px: 3,
-                        py: 1.6,
-                        fontWeight: 700,
-                        borderRadius: 3,
-                        bgcolor: "background.paper",
-                        boxShadow: 1,
-                        "&:hover": { bgcolor: "primary.main", color: "#fff", transform: "scale(1.04)" },
-                        transition: "all 0.25s",
-                      }}
-                    />
-                  </Tooltip>
-                </Box>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </Box>
-
-        {/* FEATURED BOOKS GRID */}
-        <Box sx={{ mb: { xs: 8, md: 12 } }}>
-          {/* Header */}
-          <Grid
-            container
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ mb: 4 }}
-          >
-            <Grid item>
-              <Typography variant="h5" sx={{ fontWeight: 800 }}>
-                Featured Books
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Hand-picked & recommended reads
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              <Button size="small" variant="outlined">
-                View All
-              </Button>
-            </Grid>
-          </Grid>
-
-          {/* Book Grid */}
-          <Grid container justifyContent="space-around" spacing={{ xs: 2, sm: 3, md: 4 }}>
-            {sampleBooks.map((b) => (
-              <Grid
-                item
-                xs={12}  // 1 per row on mobile
-                sm={6}   // 2 per row on small screens
-                md={4}   // 3 per row on medium screens
-                lg={3}   // 4 per row on large screens
-                xl={2}   // 6 per row on extra large screens
-                key={b.id}
-              >
-                <motion.div
-                  whileHover={{ scale: 1.03, y: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Card
-                    sx={{
-                      borderRadius: 1,
-                      overflow: "hidden",
-                      display: "flex",
-                      flexDirection: "column",
-                      boxShadow: 3,
-                      height: "100%",
-                      "&:hover": { boxShadow: 6 },
-                    }}
-                  >
-                    {/* Book Image */}
-                    <Box
-                      component="img"
-                      src={b.cover || b.image || b.img}
-                      alt={b.title}
-                      sx={{
-                        width: "100%",
-                        height: { xs: 140, sm: 140, md: 160, lg: 180, xl: 200 },
-                        objectFit: "cover",
-                        flexShrink: 0,
-                      }}
-                    />
-
-                    {/* Card Content */}
-                    <CardContent sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
-                        {b.title}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {b.author}
-                      </Typography>
-
-                      <Stack direction="row" spacing={1} mt={1} alignItems="center">
-                        <Rating value={b.rating || 5} size="small" readOnly />
-                        <Typography variant="body2" color="text.secondary">
-                          ({b.reviews || 120})
-                        </Typography>
-                      </Stack>
-
-                      <Stack direction="row" spacing={1} mt="auto">
-                        <Button size="small" variant="outlined" startIcon={<InfoIcon />} sx={{ flex: 1 }}>
-                          Details
-                        </Button>
-                        <Button size="small" variant="contained" startIcon={<FavoriteIcon />} sx={{ flex: 1 }}>
-                          Borrow
-                        </Button>
-                      </Stack>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-
       </Container>
+      <Box
+  sx={{
+    width: "100%",
+    minHeight: 650,
+    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${BGImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundAttachment: "fixed",
+    px: 3,
+    py: { xs: 6, md: 10 },
+    position: "relative",
+  }}
+>
+  {/* Title */}
+  <Typography
+    variant="h4"
+    sx={{
+      fontWeight: 800,
+      color: "white",
+      textAlign: "center",
+      mb: 4,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+    }}
+  >
+    Khoảnh khắc thư viện
+  </Typography>
+
+  {/* IMAGES INSIDE */}
+  <Grid container spacing={2} justifyContent="center">
+    {[
+      img01, img02, img03, img04,
+      img05, img06, img07, img08
+    ].map((src, i) => (
+      <Grid key={i} item xs={12} sm={6} md={3}>
+        <Box
+          component="img"
+          src={src}
+          alt={`gallery-${i}`}
+          sx={{
+            width: "100%",
+            height: 220,
+            objectFit: "cover",
+            borderRadius: 1,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
+          }}
+        />
+      </Grid>
+    ))}
+  </Grid>
+</Box>
     </Box>
   );
 }

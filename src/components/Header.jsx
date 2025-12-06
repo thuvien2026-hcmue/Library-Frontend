@@ -17,6 +17,7 @@ import {
     Divider,
     useTheme,
     Collapse,
+    useMediaQuery,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -33,7 +34,7 @@ import HoverMenuButton from "./HoverMenuButton";
 
 export default function Header() {
     const theme = useTheme();
-    
+
     const [open, setOpen] = useState(false);
     const { darkMode, setDarkMode } = useThemeMode();
     const [openIntro, setOpenIntro] = useState(false);
@@ -56,6 +57,13 @@ export default function Header() {
     const toggleDrawer = (state) => () => {
         setOpen(state);
     };
+    const isLGUp = useMediaQuery(theme.breakpoints.up("lg"));
+    useEffect(() => {
+        if (isLGUp) {
+            setOpen(false);
+        }
+    }, [isLGUp]);
+
 
     return (
         <>
@@ -84,7 +92,7 @@ export default function Header() {
                         edge="start"
                         onClick={toggleDrawer(true)}
                         sx={{
-                            display: { xs: "flex", md: "none" }, // SHOW ONLY ON MOBILE
+                            display: { xs: "flex", lg: "none" },
                         }}
                     >
                         <MenuIcon />
@@ -129,7 +137,7 @@ export default function Header() {
                     {/* --- NAVIGATION LINKS (HIDE ON MOBILE) --- */}
                     <Box
                         sx={{
-                            display: { xs: "none", md: "flex" },
+                            display: { xs: "none", lg: "flex" },
                             gap: 1,
                             alignItems: "center",
                         }}
@@ -234,7 +242,7 @@ export default function Header() {
             </AppBar>
 
             {/* --- MOBILE DRAWER --- */}
-            <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
+            <Drawer anchor="left" open={open} onClose={toggleDrawer(false)} sx={{ zIndex: 12000 }}>
                 <Box sx={{ width: 260, p: 2 }}>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
                         <Box

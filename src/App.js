@@ -7,6 +7,7 @@ import Catalogue from './page/Catalogue'
 // import Login from './page/Login'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import ScrollToTopButton from './components/ScrollToTopButton'
 
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <ScrollToTopButton />
     </div>
   )
 }
