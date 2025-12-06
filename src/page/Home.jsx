@@ -57,13 +57,6 @@ export default function Home() {
     { name: "Mathematics", icon: <LibraryBooksIcon /> },
   ];
 
-  const stats = [
-    { num: "120,000+", label: "Books Available" },
-    { num: "8,500+", label: "Online Journals" },
-    { num: "20,000+", label: "Active Students" },
-    { num: "1,200+", label: "Daily Visitors" },
-  ];
-
   const news = [
     {
       title: "Ngày sách và văn hóa đọc Năm 2025",
@@ -564,7 +557,7 @@ export default function Home() {
                 >
                   <Card
                     sx={{
-                      borderRadius: 3,
+                      borderRadius: 1,
                       overflow: "hidden",
                       display: "flex",
                       flexDirection: "column",
@@ -580,7 +573,7 @@ export default function Home() {
                       alt={b.title}
                       sx={{
                         width: "100%",
-                        height: { xs: 200, sm: 220, md: 240, lg: 260, xl: 280 },
+                        height: { xs: 140, sm: 140, md: 160, lg: 180, xl: 200 },
                         objectFit: "cover",
                         flexShrink: 0,
                       }}

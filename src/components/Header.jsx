@@ -269,14 +269,17 @@ export default function Header() {
 
                         <Collapse in={openIntro} timeout="auto" unmountOnExit>
                             <List sx={{ pl: 3 }}>
-                                <ListItemButton component={RouterLink} to="/gioi-thieu/tam-nhin" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Tầm nhìn & Sứ mệnh" />
+                                <ListItemButton component={RouterLink} to="/gioi-thieu/gioi-thieu" onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Giới thiệu chung" />
                                 </ListItemButton>
                                 <ListItemButton component={RouterLink} to="/gioi-thieu/co-cau" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Cơ cấu tổ chức" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/gioi-thieu/lich-su" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Lịch sử hình thành" />
+                                <ListItemButton component={RouterLink} to="/gioi-thieu/chuc-nang" onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Chức năng nhiệm vụ" />
+                                </ListItemButton>
+                                <ListItemButton component={RouterLink} to="/gioi-thieu/noi-quy" onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Nội quy thư viện" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
@@ -291,13 +294,13 @@ export default function Header() {
                         <Collapse in={openSearch} timeout="auto" unmountOnExit>
                             <List sx={{ pl: 3 }}>
                                 <ListItemButton component={RouterLink} to="/tra-cuu/tai-lieu" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Tra cứu tài liệu" />
+                                    <ListItemText primary="Mục lục trực tuyến" />
                                 </ListItemButton>
                                 <ListItemButton component={RouterLink} to="/tra-cuu/muc-luc" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Mục lục sách" />
+                                    <ListItemText primary="Thư viện số" />
                                 </ListItemButton>
                                 <ListItemButton component={RouterLink} to="/tra-cuu/nang-cao" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Tra cứu nâng cao" />
+                                    <ListItemText primary="Tìm kiếm tập trung" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
@@ -323,13 +326,19 @@ export default function Header() {
                         <Collapse in={openService} timeout="auto" unmountOnExit>
                             <List sx={{ pl: 3 }}>
                                 <ListItemButton component={RouterLink} to="/dich-vu/muon-sach" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Dịch vụ mượn sách" />
+                                    <ListItemText primary="Mượn đọc tại chỗ" />
                                 </ListItemButton>
                                 <ListItemButton component={RouterLink} to="/dich-vu/phong-doc" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Phòng đọc" />
+                                    <ListItemText primary="Mượn sách về nhà" />
                                 </ListItemButton>
                                 <ListItemButton component={RouterLink} to="/dich-vu/ho-tro" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Hỗ trợ học tập" />
+                                    <ListItemText primary="Cung cấp phòng học nhóm" />
+                                </ListItemButton>
+                                <ListItemButton component={RouterLink} to="/dich-vu/ho-tro" onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Tư vấn thông tin" />
+                                </ListItemButton>
+                                <ListItemButton component={RouterLink} to="/dich-vu/ho-tro" onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Cung cấp thông tin - tài liệu theo yêu cầu" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
@@ -344,13 +353,19 @@ export default function Header() {
                         <Collapse in={openSupport} timeout="auto" unmountOnExit>
                             <List sx={{ pl: 3 }}>
                                 <ListItemButton component={RouterLink} to="/ho-tro/faq" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Hỏi đáp" />
+                                    <ListItemText primary="Phản hồi góp ý" />
                                 </ListItemButton>
                                 <ListItemButton component={RouterLink} to="/ho-tro/huong-dan" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Hướng dẫn sử dụng" />
+                                    <ListItemText primary="Đề nghị mua tài liệu" />
                                 </ListItemButton>
                                 <ListItemButton component={RouterLink} to="/ho-tro/tai-nguyen" onClick={toggleDrawer(false)}>
-                                    <ListItemText primary="Tài nguyên khác" />
+                                    <ListItemText primary="Yêu cầu di chuyển tài liệu" />
+                                </ListItemButton>
+                                <ListItemButton component={RouterLink} to="/ho-tro/tai-nguyen" onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Cẩm nang hướng dẫn" />
+                                </ListItemButton>
+                                <ListItemButton component={RouterLink} to="/ho-tro/tai-nguyen" onClick={toggleDrawer(false)}>
+                                    <ListItemText primary="Hướng dẫn sử dụng" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
