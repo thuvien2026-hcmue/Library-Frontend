@@ -302,6 +302,18 @@ export default function Home() {
             mb: { xs: 2, md: 4 }
           }}
         >
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontWeight: 800,
+              fontSize: { xs: "1.2rem", md: "1.6rem" },
+              mb: 2,
+              letterSpacing: "0.5px",
+            }}
+          >
+            Đơn vị liên kết
+          </Typography>
+
           {/* ---- Custom MUI Navigation Buttons ---- */}
           <IconButton
             className="nav-btn"
@@ -469,56 +481,63 @@ export default function Home() {
 
       </Container>
       <Box
-  sx={{
-    width: "100%",
-    minHeight: 650,
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${BGImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundAttachment: "fixed",
-    px: 3,
-    py: { xs: 6, md: 10 },
-    position: "relative",
-  }}
->
-  {/* Title */}
-  <Typography
-    variant="h4"
-    sx={{
-      fontWeight: 800,
-      color: "white",
-      textAlign: "center",
-      mb: 4,
-      textTransform: "uppercase",
-      letterSpacing: 1,
-    }}
-  >
-    Khoảnh khắc thư viện
-  </Typography>
-
-  {/* IMAGES INSIDE */}
-  <Grid container spacing={2} justifyContent="center">
-    {[
-      img01, img02, img03, img04,
-      img05, img06, img07, img08
-    ].map((src, i) => (
-      <Grid key={i} item xs={12} sm={6} md={3}>
-        <Box
-          component="img"
-          src={src}
-          alt={`gallery-${i}`}
+        sx={{
+          width: "100%",
+          minHeight: 650,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${BGImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          px: 3,
+          py: { xs: 6, md: 10 },
+          position: "relative",
+        }}
+      >
+        {/* Title */}
+        <Typography
+          variant="h4"
           sx={{
-            width: "100%",
-            height: 220,
-            objectFit: "cover",
-            borderRadius: 1,
-            boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
+            fontWeight: 800,
+            color: "white",
+            textAlign: "center",
+            mb: 4,
+            textTransform: "uppercase",
+            letterSpacing: 1,
           }}
-        />
-      </Grid>
-    ))}
-  </Grid>
-</Box>
+        >
+          Khoảnh khắc thư viện
+        </Typography>
+
+        {/* IMAGES INSIDE */}
+        <Grid container spacing={2} justifyContent="center">
+          {[
+            img01, img02, img03, img04,
+            img05, img06, img07, img08
+          ].map((src, i) => (
+            <Grid key={i} item xs={12} sm={6} md={3}>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <Box
+                  component="img"
+                  src={src}
+                  alt={`gallery-${i}`}
+                  sx={{
+                    width: "100%",
+                    height: 220,
+                    objectFit: "cover",
+                    borderRadius: 1,
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
+                  }}
+                />
+              </motion.div>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 }
