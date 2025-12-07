@@ -17,6 +17,7 @@ import {
   Tooltip,
   Badge,
   IconButton,
+  Dialog,
 } from "@mui/material";
 
 import { motion } from "framer-motion";
@@ -30,6 +31,7 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import BookCard from "../components/Bookcard";
 import sampleBooks from "../sample-data/sampleBooks";
 import BGImage from "../assets/image/bg_img.jpg";
+import BGImage2 from "../assets/image/bg_img2.jpg";
 import AD1 from "../assets/image/advert_1.jpg";
 import AD2 from "../assets/image/advert_2.jpg";
 import AD3 from "../assets/image/advert_3.jpg";
@@ -54,8 +56,8 @@ import "swiper/css/autoplay";
 import "swiper/css/effect-cube";
 import { EffectCube } from "swiper/modules";
 import Chatbot from "../components/Chatbot";
-
 export default function Home() {
+  const [open, setOpen] = useState(false);
 
   const news = [
     {
@@ -223,11 +225,16 @@ export default function Home() {
                   textDecoration: "none",
                   color: "inherit",
                   cursor: "pointer",
+
+                  "&:hover .title": {
+                    color: "primary.main",
+                  },
                 }}
               >
                 <Typography
                   variant="subtitle1"
-                  sx={{ fontWeight: 700 }}
+                  className="title"
+                  sx={{ fontWeight: 700, transition: "0.2s" }}
                 >
                   {n.title}
                 </Typography>
@@ -384,6 +391,100 @@ export default function Home() {
           </Swiper>
         </Box>
 
+      </Container>
+
+      <Box
+        sx={{
+          width: "100%",
+          minHeight: 650,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${BGImage2})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          px: 3,
+          py: { xs: 6, md: 10 },
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+
+        <motion.div
+          onClick={() => setOpen(true)}
+          animate={{
+            scale: [1, 1.15, 1],
+            boxShadow: [
+              "0 0 0px rgba(255,255,255,0.3)",
+              "0 0 25px rgba(255,255,255,0.6)",
+              "0 0 0px rgba(255,255,255,0.3)",
+            ],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          style={{
+            width: 70,
+            height: 70,
+            borderRadius: "50%",
+            border: "3px solid white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            background: "rgba(255,255,255,0.1)",
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          <PlayArrowIcon sx={{ fontSize: 40, color: "white" }} />
+        </motion.div>
+
+        {/* NEW MAIN TITLE */}
+        <Typography
+          sx={{
+            mt: 4,
+            fontSize: { xs: "32px", md: "54px" },
+            fontWeight: 700,
+            color: "white",
+            textAlign: "center",
+            fontFamily: "Satisfy",
+          }}
+        >
+          Khám phá Thư viện
+        </Typography>
+
+        {/* NEW SUBTITLE */}
+        <Typography
+          sx={{
+            mt: 1,
+            fontSize: { xs: "22px", md: "34px" },
+            fontWeight: 600,
+            color: "white",
+            textAlign: "center",
+          }}
+        >
+          Hành trình tri thức bắt đầu từ đây
+        </Typography>
+      </Box>
+
+      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md">
+        <Box sx={{ position: "relative", padding: 0 }}>
+          <iframe
+            width="800"
+            height="450"
+            src="https://www.youtube.com/embed/euT9loeZNUw"
+            title="Video Intro"
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
+        </Box>
+      </Dialog>
+
+      <Container maxWidth="lg" sx={{ pt: { xs: 2, md: 4 } }}>
         {/* TRENDING RESOURCES */}
         <Box sx={{ mb: { xs: 8, md: 12 } }}>
           <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
@@ -478,7 +579,6 @@ export default function Home() {
           </Swiper>
 
         </Box>
-
       </Container>
       <Box
         sx={{
@@ -491,6 +591,7 @@ export default function Home() {
           px: 3,
           py: { xs: 6, md: 10 },
           position: "relative",
+          mb: 10,
         }}
       >
         {/* Title */}
