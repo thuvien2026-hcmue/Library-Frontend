@@ -1,32 +1,33 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Home from './page/Home'
-// import About from './page/About'
-// import Services from './page/Services'
-// import Login from './page/Login'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import ScrollToTopButton from './components/ScrollToTopButton'
-import Gioithieuchung from './page/Gioithieu/Gioithieuchung'
-import ScrollToTop from './components/ScrollToTop'
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import AppHeader from "./components/AppHeader";
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
+import DashboardRoutes from "./routes/DashboardRoutes";
+import PublicRoutes from "./routes/PublicRoutes";
 
 export default function App() {
+  const location = useLocation();
+  const hideLayout = location.pathname.startsWith("/dashboard");
+
   return (
-    <div>
+    <>
       <ScrollToTop />
-      <Header />
+
+      {!hideLayout && <AppHeader />}
+
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/gioi-thieu/gioi-thieu" element={<Gioithieuchung />} />
-          {/* <Route path="/about" element={<About/>} /> */}
-          {/* <Route path="/services" element={<Services />} /> */}
-          {/* <Route path="/login" element={<Login/>} /> */}
+          {DashboardRoutes()}
+          {PublicRoutes()}
+
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      <Footer />
-      <ScrollToTopButton />
-    </div>
-  )
+
+      {!hideLayout && <Footer />}
+      {!hideLayout && <ScrollToTopButton />}
+    </>
+  );
 }

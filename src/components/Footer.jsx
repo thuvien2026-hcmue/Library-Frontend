@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Container,
@@ -48,39 +49,42 @@ export default function Footer() {
               Thư Viện HCMUE
             </Typography>
             <Typography sx={{ opacity: 0.85, mb: 1.5 }}>
-              Tòa nhà Thư viện – Nhà làm việc Giáo sư, Lầu 1–7  
+              Tòa nhà Thư viện – Nhà làm việc Giáo sư, Lầu 1–7
               280 An Dương Vương, Phường Chợ Quán, TP. Hồ Chí Minh
             </Typography>
             <Typography sx={{ opacity: 0.85 }}>
-              SĐT: (028) 38352020 – nội bộ 231  
+              SĐT: (028) 38352020 – nội bộ 231
             </Typography>
             <Typography sx={{ opacity: 0.85 }}>Email: thuvien@hcmue.edu.vn</Typography>
           </Grid>
 
           {/* COL 2 - Quick Links */}
-          <Grid item xs={12} md={4}>
+          <Grid quick xs={12} md={4}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
               Liên kết nhanh
             </Typography>
 
             <Stack spacing={1.3}>
               {[
-                "Trang chủ",
-                "Giới thiệu",
-                "Tra cứu tài liệu",
-                "Tin tức – Sự kiện",
-                "Liên hệ",
-              ].map((text) => (
+                { title: "Trang chủ", href: "/" },
+                { title: "Giới thiệu", href: "/gioi-thieu/gioi-thieu-chung" },
+                { title: "Tra cứu tài liệu", href: "/tai-lieu/tai-lieu" },
+                { title: "Tin tức – Sự kiện", href: "/tin-tuc" },
+                { title: "Liên hệ", href: "/lien-he" },
+              ].map((quick, q) => (
                 <Typography
-                  key={text}
+                  key={q}
+                  component={RouterLink}
+                  to={quick.href}
                   sx={{
                     opacity: 0.8,
                     cursor: "pointer",
+                    textDecoration: "none",
                     transition: "0.25s",
                     "&:hover": { opacity: 1, pl: 1, color: "#00e5ff" },
                   }}
                 >
-                  {text}
+                  {quick.title}
                 </Typography>
               ))}
             </Stack>
@@ -94,13 +98,16 @@ export default function Footer() {
 
             <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
               {[
-                { icon: <Facebook />, color: "#1877f2" },
-                { icon: <Instagram />, color: "#e1306c" },
-                { icon: <YouTube />, color: "#ff0000" },
-                { icon: <Mail />, color: "#ffc400" },
+                { icon: <Facebook />, color: "#1877f2", href: "https://www.facebook.com/lib.hcmue.edu.vn" },
+                { icon: <YouTube />, color: "#ff0000", href: "https://www.youtube.com/watch?v=r43f1JIExvI" },
               ].map((item, i) => (
                 <IconButton
                   key={i}
+                  component="a"
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  aria-label={item.href}
                   sx={{
                     color: "white",
                     border: "1px solid rgba(255,255,255,0.3)",
@@ -156,7 +163,7 @@ export default function Footer() {
             letterSpacing: 0.4,
           }}
         >
-          © {new Date().getFullYear()} HCMUE Library — All rights reserved.
+          Copyright © 2020 Thư viện Trường Đại học Sư Phạm Thành Phố Hồ Chí Minh.
         </Typography>
       </Container>
     </Box>

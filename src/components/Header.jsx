@@ -31,9 +31,23 @@ import LogoIMG from "../assets/image/logo.jpg";
 import { Link as RouterLink } from "react-router-dom";
 import NavButton from "./NavButton";
 import HoverMenuButton from "./HoverMenuButton";
+import Marquee from "./Marquee";
 
 export default function Header() {
     const theme = useTheme();
+    const [search, setSearch] = useState("");
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (!search.trim()) return;
+
+        const url = `https://search.hcmue.edu.vn/iii/encore/search/C__S${encodeURIComponent(
+            search
+        )}`;
+
+        window.location.href = url; // hoặc window.open(url, "_blank")
+    };
+
 
     const [open, setOpen] = useState(false);
     const { darkMode, setDarkMode } = useThemeMode();
@@ -67,12 +81,31 @@ export default function Header() {
 
     return (
         <>
+            <div
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 33,
+                    lineHeight: `${33}px`,
+                    background: "#1976d2",   // same as MUI primary.main
+                    color: "#fff",
+                    zIndex: 1200,            // must be higher than AppBar
+                    padding: "0 16px",
+                }}
+            >
+                <Marquee speed={10}>
+                    <span style={{ marginRight: 40 }}>Chào mừng bạn đến với Website Thư viện Trường Đại học Sư phạm Thành phố Hồ Chí Minh</span>
+                </Marquee>
+            </div>
             {/* TOP NAVBAR */}
             <AppBar
                 position="fixed"
                 color="default"
                 elevation={scrolled ? 6 : 0}
                 sx={{
+                    top: JSON.parse(localStorage.getItem("user")) ? 33 : 0,
                     backdropFilter: "blur(10px)",
                     bgcolor: theme.palette.background.paper,
                     transition: "all 0.25s ease",
@@ -147,47 +180,49 @@ export default function Header() {
                         <HoverMenuButton
                             title="Giới thiệu"
                             items={[
-                                { label: "Giới thiệu chung", to: "/gioi-thieu/gioi-thieu" },
-                                { label: "Cơ cấu tổ chức", to: "/gioi-thieu/co-cau" },
-                                { label: "Chức năng nhiệm vụ", to: "/gioi-thieu/chuc-nang" },
-                                { label: "Nội quy thư viện", to: "/gioi-thieu/noi-quy" },
+                                { label: "Giới thiệu chung", to: "/gioi-thieu/gioi-thieu-chung" },
+                                { label: "Cơ cấu tổ chức", to: "/gioi-thieu/co-cau-to-chuc" },
+                                { label: "Chức năng nhiệm vụ", to: "/gioi-thieu/chuc-nang-nhiem-vu" },
+                                { label: "Nội quy thư viện", to: "/gioi-thieu/noi-quy-thu-vien" },
                             ]}
                         />
 
                         <HoverMenuButton
                             title="Tra cứu"
                             items={[
-                                { label: "Mục lục trực tuyến", to: "/tra-cuu/muc-luc" },
-                                { label: "Thư viện số", to: "/tra-cuu/thu-vien-so" },
-                                { label: "Tìm kiếm tập trung", to: "/tra-cuu/nang-cao" },
+                                { label: "Mục lục trực tuyến", to: "https://opac.hcmue.edu.vn/" },
+                                { label: "Thư viện số", to: "https://dlib.hcmue.edu.vn/" },
+                                { label: "Tìm kiếm tập trung", to: "https://search.hcmue.edu.vn/iii/encore/?lang=vie" },
                             ]}
                         />
 
-                        <NavButton to="/san-pham">Sản phẩm</NavButton>
+                        <NavButton to="/tai-lieu/tai-lieu">Tài liệu</NavButton>
 
                         <HoverMenuButton
                             title="Dịch vụ"
                             items={[
-                                { label: "Mượn đọc tại chỗ", to: "/dich-vu/muon-sach" },
-                                { label: "Mượn sách về nhà", to: "/dich-vu/phong-doc" },
-                                { label: "Cung cấp phòng học nhóm", to: "/dich-vu/ho-tro" },
-                                { label: "Tư vấn thông tin", to: "/dich-vu/phong-doc" },
-                                { label: "Cung cấp thông tin - tài liệu theo yêu cầu", to: "/dich-vu/ho-tro" },
+                                { label: "Mượn đọc tại chỗ", to: "/dich-vu/muon-doc-tai-cho" },
+                                { label: "Mượn sách về nhà", to: "/dich-vu/muon-sach-ve-nha" },
+                                { label: "Cung cấp phòng học nhóm", to: "/dich-vu/cung-cap-phong-hoc-nhom" },
+                                { label: "Tư vấn thông tin", to: "/dich-vu/tu-van-thong-tin" },
+                                { label: "Cung cấp thông tin - tài liệu theo yêu cầu", to: "/dich-vu/cung-cap-thong-tin-tai-lieu-theo-yeu-cau" },
                             ]}
                         />
 
                         <HoverMenuButton
                             title="Hỗ trợ"
                             items={[
-                                { label: "Phản hồi góp ý", to: "/ho-tro/faq" },
-                                { label: "Đề nghị mua tài liệu", to: "/ho-tro/huong-dan" },
-                                { label: "Yêu cầu di chuyển tài liệu", to: "/ho-tro/tai-nguyen" },
-                                { label: "Cẩm nang hướng dẫn", to: "/ho-tro/huong-dan" },
-                                { label: "Hướng dẫn sử dụng", to: "/ho-tro/tai-nguyen" },
+                                { label: "Phản hồi góp ý", to: "/ho-tro/phan-hoi-gop-y" },
+                                { label: "Đề nghị mua tài liệu", to: "/ho-tro/de-nghi-mua-tai-lieu" },
+                                { label: "Yêu cầu di chuyển tài liệu", to: "/ho-tro/yeu-cau-di-chuyen-tai-lieu" },
+                                { label: "Cẩm nang hướng dẫn", to: "/ho-tro/cam-nang-huong-dan" },
+                                { label: "Hướng dẫn sử dụng", to: "/ho-tro/huong-dan-su-dung" },
                             ]}
                         />
 
-                        <NavButton to="/lien-he">Liên hệ</NavButton>
+                        <NavButton to="/lien-he/thu-vien-truong-dai-hoc-su-pham-tp-ho-chi-minh">Liên hệ</NavButton>
+
+                        <NavButton to="/van-ban/van-ban">Văn bản</NavButton>
                     </Box>
 
                     {/* SPACER */}
@@ -196,6 +231,7 @@ export default function Header() {
                     {/* --- SEARCH BAR --- */}
                     <Paper
                         component="form"
+                        onSubmit={handleSearch}
                         elevation={2}
                         sx={{
                             display: { xs: "none", sm: "flex" }, // show on sm and above
@@ -210,12 +246,19 @@ export default function Header() {
                         <SearchIcon color="action" />
                         <InputBase
                             placeholder="Tìm sách..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
                             sx={{
                                 ml: 1,
                                 flex: 1,
                             }}
                         />
-                        <Button variant="contained" size="small" sx={{ borderRadius: "20px" }}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            size="small"
+                            sx={{ borderRadius: "20px" }}
+                        >
                             Tìm
                         </Button>
                     </Paper>
@@ -283,16 +326,16 @@ export default function Header() {
 
                         <Collapse in={openIntro} timeout="auto" unmountOnExit>
                             <List sx={{ pl: 3 }}>
-                                <ListItemButton component={RouterLink} to="/gioi-thieu/gioi-thieu" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/gioi-thieu/gioi-thieu-chung" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Giới thiệu chung" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/gioi-thieu/co-cau" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/gioi-thieu/co-cau-to-chuc" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Cơ cấu tổ chức" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/gioi-thieu/chuc-nang" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/gioi-thieu/chuc-nang-nhiem-vu" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Chức năng nhiệm vụ" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/gioi-thieu/noi-quy" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/gioi-thieu/noi-quy-thu-vien" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Nội quy thư viện" />
                                 </ListItemButton>
                             </List>
@@ -307,13 +350,13 @@ export default function Header() {
 
                         <Collapse in={openSearch} timeout="auto" unmountOnExit>
                             <List sx={{ pl: 3 }}>
-                                <ListItemButton component={RouterLink} to="/tra-cuu/tai-lieu" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="https://opac.hcmue.edu.vn/" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Mục lục trực tuyến" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/tra-cuu/muc-luc" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="https://dlib.hcmue.edu.vn/" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Thư viện số" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/tra-cuu/nang-cao" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="https://search.hcmue.edu.vn/iii/encore/?lang=vie" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Tìm kiếm tập trung" />
                                 </ListItemButton>
                             </List>
@@ -323,10 +366,10 @@ export default function Header() {
                         <ListItem disablePadding>
                             <ListItemButton
                                 component={RouterLink}
-                                to="/san-pham"
+                                to="/tai-lieu/tai-lieu"
                                 onClick={toggleDrawer(false)}
                             >
-                                <ListItemText primary="Sản phẩm" />
+                                <ListItemText primary="Tài liệu" />
                             </ListItemButton>
                         </ListItem>
 
@@ -339,19 +382,19 @@ export default function Header() {
 
                         <Collapse in={openService} timeout="auto" unmountOnExit>
                             <List sx={{ pl: 3 }}>
-                                <ListItemButton component={RouterLink} to="/dich-vu/muon-sach" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/dich-vu/muon-doc-tai-cho" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Mượn đọc tại chỗ" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/dich-vu/phong-doc" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/dich-vu/muon-sach-ven-nha" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Mượn sách về nhà" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/dich-vu/ho-tro" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/dich-vu/cung-cap-phong-hop-nhom" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Cung cấp phòng học nhóm" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/dich-vu/ho-tro" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/dich-vu/tu-van-thong-tin" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Tư vấn thông tin" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/dich-vu/ho-tro" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/dich-vu/cung-cap-thong-tin-tai-lieu-theo-yeu-cau" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Cung cấp thông tin - tài liệu theo yêu cầu" />
                                 </ListItemButton>
                             </List>
@@ -366,19 +409,19 @@ export default function Header() {
 
                         <Collapse in={openSupport} timeout="auto" unmountOnExit>
                             <List sx={{ pl: 3 }}>
-                                <ListItemButton component={RouterLink} to="/ho-tro/faq" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/ho-tro/phan-hoi-y-kien" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Phản hồi góp ý" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/ho-tro/huong-dan" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/ho-tro/de-nghi-mua-tai-lieu" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Đề nghị mua tài liệu" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/ho-tro/tai-nguyen" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/ho-tro/yeu-cau-di-chuyen-tai-lieu" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Yêu cầu di chuyển tài liệu" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/ho-tro/tai-nguyen" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/ho-tro/cam-nang-huong-dan" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Cẩm nang hướng dẫn" />
                                 </ListItemButton>
-                                <ListItemButton component={RouterLink} to="/ho-tro/tai-nguyen" onClick={toggleDrawer(false)}>
+                                <ListItemButton component={RouterLink} to="/ho-tro/huong-dan-su-dung" onClick={toggleDrawer(false)}>
                                     <ListItemText primary="Hướng dẫn sử dụng" />
                                 </ListItemButton>
                             </List>
@@ -388,7 +431,7 @@ export default function Header() {
                         <ListItem disablePadding>
                             <ListItemButton
                                 component={RouterLink}
-                                to="/lien-he"
+                                to="/lien-he/thu-vien-truong-dai-hoc-su-pham-tp-ho-chi-minh"
                                 onClick={toggleDrawer(false)}
                             >
                                 <ListItemText primary="Liên hệ" />
@@ -403,6 +446,7 @@ export default function Header() {
                     <Box sx={{ mt: 2 }}>
                         <Paper
                             component="form"
+                            onSubmit={handleSearch}
                             elevation={1}
                             sx={{
                                 display: "flex",
@@ -415,6 +459,8 @@ export default function Header() {
                         >
                             <SearchIcon color="action" />
                             <InputBase
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
                                 placeholder="Tìm sách..."
                                 sx={{
                                     ml: 1,
@@ -423,6 +469,7 @@ export default function Header() {
                                 }}
                             />
                             <Button
+                                type="submit"
                                 variant="contained"
                                 size="small"
                                 sx={{
