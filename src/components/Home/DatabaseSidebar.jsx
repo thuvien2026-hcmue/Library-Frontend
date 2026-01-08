@@ -14,7 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "http://https://library-backend-xhvu.onrender.com/api";
 
 export default function DatabaseSidebar({ open, onClose }) {
   const [items, setItems] = useState([]);
