@@ -113,7 +113,7 @@ export default function TrendBook() {
         py: 4,
         maxWidth: 1400,
         mx: "auto",
-        mt: { xs: 6, md: 10 },
+        mt: { xs: 6, md: 14 },
       }}
     >
       <Helmet>
