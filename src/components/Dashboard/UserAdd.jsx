@@ -9,6 +9,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { apiFetch } from "../../services/api";
 
 export default function UserAdd() {
   const navigate = useNavigate();
@@ -22,9 +23,8 @@ export default function UserAdd() {
   });
 
   const submit = async () => {
-    await fetch("http://localhost:5000/api/users", {
+    await apiFetch("/users", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
 

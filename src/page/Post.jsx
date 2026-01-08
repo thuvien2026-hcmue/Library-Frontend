@@ -246,7 +246,7 @@ export default function Post() {
                 maxWidth: 1400,
                 mx: "auto",
                 flexDirection: { xs: "column", md: "row" },
-                mt: { xs: 6, md: 10 },
+                mt: { xs: 6, md: 14 },
             }}
         >
             <Helmet>
@@ -408,7 +408,7 @@ export default function Post() {
                     sx={{
                         width: 260,
                         position: "sticky",
-                        top: { md: scrolled ? 110 : 100 },
+                        top: { md: scrolled ? 140 : 100 },
                         transition: "top 0.3s",
                         alignSelf: "flex-start",
                         display: { xs: "none", lg: "block" },

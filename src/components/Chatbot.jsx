@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../assets/css/chatbot.css";
 import { useChatSession, useChatMessages, useFAQ, useChatVisibility } from "../hooks/useChatHook";
 
-const RENDER_URL = "https://chatbot-app-uxs8.onrender.com";
+const RENDER_URL = "https://chatbot-backend-39g7.onrender.com";
 
 function Chatbot() {
   const { getSessionId } = useChatSession();
