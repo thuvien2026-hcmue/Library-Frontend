@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const API_BASE = "http://https://library-backend-xhvu.onrender.com/api";
+const API_BASE = "https://library-backend-xhvu.onrender.com/api";
 
 export default function NewsEventSection() {
   const [news, setNews] = useState([]);
