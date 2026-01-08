@@ -41,8 +41,8 @@ export default function PostEdit() {
   /* ===== FETCH DATA ===== */
   useEffect(() => {
     Promise.all([
-      fetch("http://localhost:5000/api/pages").then((r) => r.json()),
-      fetch(`http://localhost:5000/api/posts/${id}`).then((r) => r.json()),
+      fetch("https://library-backend-xhvu.onrender.com/api/pages").then((r) => r.json()),
+      fetch(`https://library-backend-xhvu.onrender.com/api/posts/${id}`).then((r) => r.json()),
     ])
       .then(([pagesData, postData]) => {
         setPages(pagesData);
@@ -216,7 +216,7 @@ export default function PostEdit() {
                     const token = localStorage.getItem("token");
 
                     const res = await fetch(
-                      "http://localhost:5000/api/media/upload",
+                      "https://library-backend-xhvu.onrender.com/api/media/upload",
                       {
                         method: "POST",
                         headers: {

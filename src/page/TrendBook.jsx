@@ -43,7 +43,7 @@ export default function TrendBook() {
 
   // LOAD trend book by slug
   useEffect(() => {
-    fetch(`http://localhost:5000/api/trend-books/slug/${slug}`)
+    fetch(`https://library-backend-xhvu.onrender.com/api/trend-books/slug/${slug}`)
       .then((res) => {
         if (res.status === 404) {
           navigate("/", { replace: true });
@@ -70,7 +70,7 @@ export default function TrendBook() {
     if (!trendId) return alert("Missing trend_book id!");
 
     const token = localStorage.getItem("token");
-    await fetch("http://localhost:5000/api/trend-books/update", {
+    await fetch("https://library-backend-xhvu.onrender.com/api/trend-books/update", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export default function TrendBook() {
     formData.append("upload", file);
     formData.append("trend_book_id", trendId);
 
-    const res = await fetch("http://localhost:5000/api/trend-books/upload-image", {
+    const res = await fetch("https://library-backend-xhvu.onrender.com/api/trend-books/upload-image", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,

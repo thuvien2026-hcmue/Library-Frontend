@@ -7,7 +7,7 @@ export default function PageList() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/pages")
+    fetch("https://library-backend-xhvu.onrender.com/api/pages")
       .then((res) => res.json())
       .then((data) => setRows(data));
   }, []);

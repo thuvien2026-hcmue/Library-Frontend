@@ -20,7 +20,7 @@ export default function VanBanPage() {
   const limit = 10;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/vanban?page=${page}&limit=${limit}`)
+    fetch(`https://library-backend-xhvu.onrender.com/api/vanban?page=${page}&limit=${limit}`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data.data || []);

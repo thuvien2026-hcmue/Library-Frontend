@@ -21,7 +21,7 @@ export default function VanbanEdit() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/vanban/${id}`)
+    fetch(`https://library-backend-xhvu.onrender.com/api/vanban/${id}`)
       .then((res) => res.json())
       .then((data) =>
         setForm({
@@ -40,7 +40,7 @@ export default function VanbanEdit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch(`http://localhost:5000/api/vanban/${id}`, {
+    await fetch(`https://library-backend-xhvu.onrender.com/api/vanban/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

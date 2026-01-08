@@ -17,7 +17,7 @@ export default function PostChildList({ parentPost }) {
     useEffect(() => {
         if (!parentPost?.id) return;
 
-        fetch(`http://localhost:5000/api/posts/children/${parentPost.id}`)
+        fetch(`https://library-backend-xhvu.onrender.com/api/posts/children/${parentPost.id}`)
             .then((res) => res.json())
             .then((data) => setRows(data));
     }, [parentPost]);
@@ -25,7 +25,7 @@ export default function PostChildList({ parentPost }) {
     const handleDelete = async (id) => {
         if (!window.confirm("Delete this child post?")) return;
 
-        await fetch(`http://localhost:5000/api/posts/${id}`, {
+        await fetch(`https://library-backend-xhvu.onrender.com/api/posts/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

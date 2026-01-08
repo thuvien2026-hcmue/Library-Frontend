@@ -9,7 +9,7 @@ export default function TrendBookList() {
     const navigate = useNavigate();
 
     const fetchData = async () => {
-        const res = await fetch(`http://localhost:5000/api/trend-books?q=${encodeURIComponent(q)}&limit=100`);
+        const res = await fetch(`https://library-backend-xhvu.onrender.com/api/trend-books?q=${encodeURIComponent(q)}&limit=100`);
         const data = await res.json();
         setRows((data.data || []).map(r => ({ ...r, id: r.id })));
     };
@@ -20,7 +20,7 @@ export default function TrendBookList() {
         if (!window.confirm("Delete this trend book?")) return;
 
         const token = localStorage.getItem("token");
-        await fetch(`http://localhost:5000/api/trend-books/${id}`, {
+        await fetch(`https://library-backend-xhvu.onrender.com/api/trend-books/${id}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}` },
         });

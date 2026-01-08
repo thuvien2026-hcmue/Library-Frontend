@@ -47,7 +47,7 @@ export default function Home() {
   const [trendBooks, setTrendBooks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/trend-books?limit=20")
+    fetch("https://library-backend-xhvu.onrender.com/api/trend-books?limit=20")
       .then((r) => r.json())
       .then((data) => setTrendBooks(data?.data || []))
       .catch(() => setTrendBooks([]));
@@ -59,7 +59,7 @@ export default function Home() {
      (page_id = 1 → HOME)
   ========================= */
   useEffect(() => {
-    fetch("http://localhost:5000/api/page-blocks/page/1")
+    fetch("https://library-backend-xhvu.onrender.com/api/page-blocks/page/1")
       .then((res) => res.json())
       .then((blocks) => {
         // HERO

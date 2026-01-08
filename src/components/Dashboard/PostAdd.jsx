@@ -153,7 +153,7 @@ export default function PostAdd() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-              "http://localhost:5000/api/media/upload",
+              "https://library-backend-xhvu.onrender.com/api/media/upload",
               {
                 method: "POST",
                 headers: {

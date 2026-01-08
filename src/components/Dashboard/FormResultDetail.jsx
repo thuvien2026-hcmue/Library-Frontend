@@ -8,7 +8,7 @@ export default function FormResultDetail() {
   const [row, setRow] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/form-results/${id}`)
+    fetch(`https://library-backend-xhvu.onrender.com/api/form-results/${id}`)
       .then(res => res.json())
       .then(setRow);
   }, [id]);

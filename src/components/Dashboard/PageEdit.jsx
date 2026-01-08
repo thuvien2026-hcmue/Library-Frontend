@@ -26,7 +26,7 @@ export default function PageEdit() {
 
   /* ===== FETCH PAGE ===== */
   useEffect(() => {
-    fetch(`http://localhost:5000/api/pages/${id}`)
+    fetch(`https://library-backend-xhvu.onrender.com/api/pages/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch page");
         return res.json();

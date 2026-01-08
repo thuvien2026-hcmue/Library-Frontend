@@ -11,7 +11,7 @@ export default function TrendBookCreate() {
     const _name = name.trim();
     if (!_name) return alert("Name is required!");
 
-    const res = await fetch("http://localhost:5000/api/trend-books/create", {
+    const res = await fetch("https://library-backend-xhvu.onrender.com/api/trend-books/create", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({ name: _name, content: "", image: "" }), // ✅ no slug

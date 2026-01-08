@@ -74,7 +74,7 @@ export default function Page() {
                     formData.append("upload", file);       // <--- file name must be "upload"
                     formData.append("post_id", postId);    // attach Post ID
 
-                    fetch("http://localhost:5000/api/media/upload", {
+                    fetch("https://library-backend-xhvu.onrender.com/api/media/upload", {
                         method: "POST",
                         body: formData,
                     })
@@ -97,7 +97,7 @@ export default function Page() {
 
     /* ================= LOAD POST ================= */
     useEffect(() => {
-        fetch(`http://localhost:5000/api/posts/slug/${slug}`)
+        fetch(`https://library-backend-xhvu.onrender.com/api/posts/slug/${slug}`)
             .then((res) => (res.status === 404 ? null : res.json()))
             .then((data) => {
                 if (!data) return;
@@ -109,7 +109,7 @@ export default function Page() {
                 setFormHtml(foundForm);
                 setContent(removeForm(data.content || ""));
 
-                fetch(`http://localhost:5000/api/posts/by-page/${data.page_id}`)
+                fetch(`https://library-backend-xhvu.onrender.com/api/posts/by-page/${data.page_id}`)
                     .then((res) => res.json())
                     .then(setMenuItems);
             })
@@ -148,7 +148,7 @@ export default function Page() {
         const finalContent = content + (formHtml || "");
         const token = localStorage.getItem("token");
 
-        await fetch("http://localhost:5000/api/posts/update", {
+        await fetch("https://library-backend-xhvu.onrender.com/api/posts/update", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -250,7 +250,7 @@ export default function Page() {
 
                                             const token = localStorage.getItem("token");
 
-                                            const res = await fetch("http://localhost:5000/api/media/upload", {
+                                            const res = await fetch("https://library-backend-xhvu.onrender.com/api/media/upload", {
                                                 method: "POST",
                                                 headers: {
                                                     Authorization: `Bearer ${token}`,

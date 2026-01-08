@@ -94,7 +94,7 @@ export default function Post() {
 
                     const token = localStorage.getItem("token");
 
-                    fetch("http://localhost:5000/api/media/upload", {
+                    fetch("https://library-backend-xhvu.onrender.com/api/media/upload", {
                         method: "POST",
                         headers: {
                             Authorization: `Bearer ${token}`, // 🔥 BẮT BUỘC
@@ -154,7 +154,7 @@ export default function Post() {
             }
 
             try {
-                await fetch("http://localhost:5000/api/form-results/submit", {
+                await fetch("https://library-backend-xhvu.onrender.com/api/form-results/submit", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -186,7 +186,7 @@ export default function Post() {
 
     // LOAD POST BY SLUG
     useEffect(() => {
-        fetch(`http://localhost:5000/api/posts/slug/${slug}`)
+        fetch(`https://library-backend-xhvu.onrender.com/api/posts/slug/${slug}`)
             .then((res) => {
                 if (res.status === 404) {
                     navigate("/", { replace: true });  // ⭐ redirect if slug invalid
@@ -201,7 +201,7 @@ export default function Post() {
                 setPostId(data.id);
                 setTitle(data.name);
 
-                fetch(`http://localhost:5000/api/posts/by-page/${data.page_id}`)
+                fetch(`https://library-backend-xhvu.onrender.com/api/posts/by-page/${data.page_id}`)
                     .then(res => res.json())
                     .then(setMenuItems);
             })
@@ -223,7 +223,7 @@ export default function Post() {
 
         const token = localStorage.getItem("token");
 
-        await fetch("http://localhost:5000/api/posts/update", {
+        await fetch("https://library-backend-xhvu.onrender.com/api/posts/update", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -310,7 +310,7 @@ export default function Post() {
 
                                             const token = localStorage.getItem("token");
 
-                                            const res = await fetch("http://localhost:5000/api/media/upload", {
+                                            const res = await fetch("https://library-backend-xhvu.onrender.com/api/media/upload", {
                                                 method: "POST",
                                                 headers: { Authorization: `Bearer ${token}` },
                                                 body: formData,

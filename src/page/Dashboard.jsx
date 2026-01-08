@@ -63,7 +63,7 @@ export default function Dashboard() {
     const controller = new AbortController();
     setHsLoading(true);
 
-    fetch("http://localhost:5000/api/histats/summary", {
+    fetch("https://library-backend-xhvu.onrender.com/api/histats/summary", {
       signal: controller.signal,
     })
       .then((r) => r.json())

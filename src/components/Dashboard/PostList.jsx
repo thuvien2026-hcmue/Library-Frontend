@@ -18,7 +18,7 @@ export default function PostList() {
 
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/posts")
+    fetch("https://library-backend-xhvu.onrender.com/api/posts")
       .then((res) => res.json())
       .then((data) => setPosts(data));
   }, []);
@@ -53,7 +53,7 @@ export default function PostList() {
             size="small"
             variant="outlined"
             onClick={() =>
-              fetch(`http://localhost:5000/api/posts/${params.row.id}`, {
+              fetch(`https://library-backend-xhvu.onrender.com/api/posts/${params.row.id}`, {
                 method: "DELETE",
               }).then(() => window.location.reload())
             }

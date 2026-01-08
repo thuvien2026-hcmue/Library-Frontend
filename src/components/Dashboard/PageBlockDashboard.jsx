@@ -35,7 +35,7 @@ export default function PageBlockDashboard() {
     if (!pageId) return;
 
     const res = await fetch(
-      `http://localhost:5000/api/page-blocks/page/${pageId}`
+      `https://library-backend-xhvu.onrender.com/api/page-blocks/page/${pageId}`
     );
     const data = await res.json();
     setBlocks(Array.isArray(data) ? data : []);
@@ -49,7 +49,7 @@ export default function PageBlockDashboard() {
   const addBlock = async () => {
     if (!pageId) return alert("Missing pageId");
 
-    await fetch("http://localhost:5000/api/page-blocks", {
+    await fetch("https://library-backend-xhvu.onrender.com/api/page-blocks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default function PageBlockDashboard() {
 
   /* ================= UPDATE ================= */
   const saveBlock = async (block) => {
-    await fetch(`http://localhost:5000/api/page-blocks/${block.id}`, {
+    await fetch(`https://library-backend-xhvu.onrender.com/api/page-blocks/${block.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +91,7 @@ export default function PageBlockDashboard() {
     if (!window.confirm("Delete this block?")) return;
 
     const res = await fetch(
-      `http://localhost:5000/api/page-blocks/${id}`,
+      `https://library-backend-xhvu.onrender.com/api/page-blocks/${id}`,
       {
         method: "DELETE",
         headers: {

@@ -8,11 +8,11 @@ export default function FormRootList() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/form-results/forms/pages")
+    fetch("https://library-backend-xhvu.onrender.com/api/form-results/forms/pages")
       .then(res => res.json())
       .then(setPages);
 
-    fetch("http://localhost:5000/api/form-results/forms/posts")
+    fetch("https://library-backend-xhvu.onrender.com/api/form-results/forms/posts")
       .then(res => res.json())
       .then(setPosts);
   }, []);

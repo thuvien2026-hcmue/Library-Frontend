@@ -7,7 +7,7 @@ export default function VanBanList() {
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/vanban")
+        fetch("https://library-backend-xhvu.onrender.com/api/vanban")
             .then((res) => res.json())
             .then((data) => {
                 setRows(Array.isArray(data) ? data : data.data || []);
@@ -18,7 +18,7 @@ export default function VanBanList() {
     const handleDelete = async (id) => {
         if (!window.confirm("Delete this document?")) return;
 
-        await fetch(`http://localhost:5000/api/vanban/${id}`, {
+        await fetch(`https://library-backend-xhvu.onrender.com/api/vanban/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -8,7 +8,7 @@ export default function FormResultList() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/form-results/${type}/${id}`)
+    fetch(`https://library-backend-xhvu.onrender.com/api/form-results/${type}/${id}`)
       .then(res => res.json())
       .then(data => setRows(Array.isArray(data) ? data : []));
   }, [type, id]);
@@ -16,7 +16,7 @@ export default function FormResultList() {
   const handleDelete = async (rowId) => {
     if (!window.confirm("Delete this submission?")) return;
 
-    await fetch(`http://localhost:5000/api/form-results/${rowId}`, {
+    await fetch(`https://library-backend-xhvu.onrender.com/api/form-results/${rowId}`, {
       method: "DELETE",
     });
 

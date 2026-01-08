@@ -21,7 +21,7 @@ export default function MediaList() {
     const [preview, setPreview] = useState({});
 
     const load = async () => {
-        const res = await fetch("http://localhost:5000/api/media/group-by-post");
+        const res = await fetch("https://library-backend-xhvu.onrender.com/api/media/group-by-post");
         const data = await res.json();
         setGroups(data);
     };
@@ -38,7 +38,7 @@ export default function MediaList() {
         const formData = new FormData();
         formData.append("upload", file);
 
-        await fetch(`http://localhost:5000/api/media/${id}`, {
+        await fetch(`https://library-backend-xhvu.onrender.com/api/media/${id}`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ export default function MediaList() {
     const remove = async (id) => {
         if (!window.confirm("Delete this image?")) return;
 
-        await fetch(`http://localhost:5000/api/media/${id}`, {
+        await fetch(`https://library-backend-xhvu.onrender.com/api/media/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`,

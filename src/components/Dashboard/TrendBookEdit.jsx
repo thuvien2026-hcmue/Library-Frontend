@@ -15,7 +15,7 @@ export default function TrendBookEdit() {
   const fileRef = useRef(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/trend-books/${id}`)
+    fetch(`https://library-backend-xhvu.onrender.com/api/trend-books/${id}`)
       .then((r) => r.json())
       .then((data) => {
         if (!data?.id) return navigate("/dashboard/trend-books");
@@ -35,7 +35,7 @@ export default function TrendBookEdit() {
 
     fd.append("trend_book_id", id);
 
-    const res = await fetch("http://localhost:5000/api/trend-books/upload-image", {
+    const res = await fetch("https://library-backend-xhvu.onrender.com/api/trend-books/upload-image", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: fd,
@@ -51,7 +51,7 @@ export default function TrendBookEdit() {
   const save = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:5000/api/trend-books/update", {
+    const res = await fetch("https://library-backend-xhvu.onrender.com/api/trend-books/update", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       // ✅ slug auto -> không cần gửi slug
