@@ -127,7 +127,7 @@ export default function PostAdd() {
         onEditorChange={(newValue) =>
           setPost({ ...post, content: newValue })
         }
-        apiKey="lnx4b7wzoac3yanvgdy73rbpz9ayrsuawwmm87xk7l6t6h3h"
+        apiKey="oq2a9p79qnb2jttj0svtdh35vekryddr2ub8em9r2dvzhqe6"
         init={{
           height: 400,
           menubar: true,
