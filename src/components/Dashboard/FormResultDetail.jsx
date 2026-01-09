@@ -8,14 +8,17 @@ export default function FormResultDetail() {
   const [row, setRow] = useState(null);
 
   useEffect(() => {
-    fetch(`https://library-backend-xhvu.onrender.com/api/form-results/${id}`)
+    fetch(`https://library-backend-xhvu.onrender.com/api/form-results/${id}`, {
+      cache: "no-store", // prevent 304 caching
+    })
       .then(res => res.json())
-      .then(setRow);
+      .then(setRow)
+      .catch(err => console.error(err));
   }, [id]);
 
-  if (!row) return null;
+  if (!row) return <Typography>Loading...</Typography>;
 
-  const formData = JSON.parse(row.form_data);
+  const formData = row.form_data; // already an object
 
   return (
     <Paper sx={{ p: 3 }}>
