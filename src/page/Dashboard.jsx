@@ -79,7 +79,7 @@ export default function Dashboard() {
       script.async = true;
       script.innerHTML = `
         var _Hasync = _Hasync || [];
-        _Hasync.push(['Histats.start', '1,5001419,4,1,112,33,${code}']);
+        _Hasync.push(['Histats.start', '1,5001419,4,138,112,33,${code}']);
         _Hasync.push(['Histats.fasi', '1']);
         _Hasync.push(['Histats.track_hits', '']);
       `;
