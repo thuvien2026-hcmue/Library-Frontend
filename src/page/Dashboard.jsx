@@ -284,21 +284,21 @@ export default function Dashboard() {
                 <Typography variant="body2" color="text.secondary">
                   Visits (Total)
                 </Typography>
-                <Box ref={totalRef} id="histats_total"></Box>
+                <Box ref={totalRef} id="histats_counter"></Box>
               </Paper>
 
               <Paper sx={{ p: 2, flex: 1, borderRadius: 2 }}>
                 <Typography variant="body2" color="text.secondary">
                   Visits (Today)
                 </Typography>
-                <Box ref={todayRef} id="histats_today"></Box>
+                <Box ref={todayRef} id="histats_counter"></Box>
               </Paper>
 
               <Paper sx={{ p: 2, flex: 1, borderRadius: 2 }}>
                 <Typography variant="body2" color="text.secondary">
                   Online
                 </Typography>
-                <Box ref={onlineRef} id="histats_online"></Box>
+                <Box ref={onlineRef} id="histats_counter"></Box>
               </Paper>
             </Stack>
           )}
