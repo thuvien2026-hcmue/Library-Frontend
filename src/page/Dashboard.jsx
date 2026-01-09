@@ -79,7 +79,7 @@ export default function Dashboard() {
       script.async = true;
       script.innerHTML = `
         var _Hasync = _Hasync || [];
-        _Hasync.push(['Histats.start', '1,5001419,4,138,112,33,${code}']);
+        _Hasync.push(['Histats.start', '1,5001419,4,1,112,33,${code}']);
         _Hasync.push(['Histats.fasi', '1']);
         _Hasync.push(['Histats.track_hits', '']);
       `;
@@ -284,21 +284,21 @@ export default function Dashboard() {
                 <Typography variant="body2" color="text.secondary">
                   Visits (Total)
                 </Typography>
-                <Box ref={totalRef} id="histats_counter"></Box>
+                <Box ref={totalRef} id="histats_total"></Box>
               </Paper>
 
               <Paper sx={{ p: 2, flex: 1, borderRadius: 2 }}>
                 <Typography variant="body2" color="text.secondary">
                   Visits (Today)
                 </Typography>
-                <Box ref={todayRef} id="histats_counter"></Box>
+                <Box ref={todayRef} id="histats_today"></Box>
               </Paper>
 
               <Paper sx={{ p: 2, flex: 1, borderRadius: 2 }}>
                 <Typography variant="body2" color="text.secondary">
                   Online
                 </Typography>
-                <Box ref={onlineRef} id="histats_counter"></Box>
+                <Box ref={onlineRef} id="histats_online"></Box>
               </Paper>
             </Stack>
           )}
