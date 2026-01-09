@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import {
   Box,
@@ -64,8 +64,6 @@ export default function Dashboard() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   // ✅ Histats state MUST be inside component
-  const [hs, setHs] = useState(null);
-  const [hsLoading, setHsLoading] = useState(false);
 
   useEffect(() => {
     if (location.pathname !== "/dashboard") return;
