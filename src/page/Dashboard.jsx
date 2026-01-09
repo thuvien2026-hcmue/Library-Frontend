@@ -34,6 +34,16 @@ import Logo from "../assets/image/logo.jpg";
 /* ================= CONSTANTS ================= */
 const SIDEBAR_EXPANDED = 240;
 const SIDEBAR_COLLAPSED = 80;
+const totalRef = useRef(null);
+const todayRef = useRef(null);
+const onlineRef = useRef(null);
+
+const histatsScripts = [
+  { id: "total", ref: totalRef, code: "00011111" },
+  { id: "today", ref: todayRef, code: "00000110" },
+  { id: "online", ref: onlineRef, code: "00000001" },
+];
+
 
 const menuItems = [
   { label: "Dashboard", path: "/dashboard", icon: <DashboardIcon /> },
@@ -60,21 +70,35 @@ export default function Dashboard() {
   useEffect(() => {
     if (location.pathname !== "/dashboard") return;
 
-    const controller = new AbortController();
-    setHsLoading(true);
+    histatsScripts.forEach(({ ref, code }) => {
+      if (!ref.current) return;
 
-    fetch("https://library-backend-xhvu.onrender.com/api/histats/summary", {
-      signal: controller.signal,
-    })
-      .then((r) => r.json())
-      .then((d) => setHs(d))
-      .catch((err) => {
-        if (err?.name === "AbortError") return;
-        setHs(null);
-      })
-      .finally(() => setHsLoading(false));
+      // Clear previous script if any
+      ref.current.innerHTML = "";
 
-    return () => controller.abort();
+      // Create script element
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.async = true;
+      script.innerHTML = `
+        var _Hasync = _Hasync || [];
+        _Hasync.push(['Histats.start', '1,5001419,4,138,112,33,${code}']);
+        _Hasync.push(['Histats.fasi', '1']);
+        _Hasync.push(['Histats.track_hits', '']);
+      `;
+      ref.current.appendChild(script);
+
+      // Append external Histats JS only once
+      if (!document.getElementById("histats-js")) {
+        const hsJs = document.createElement("script");
+        hsJs.id = "histats-js";
+        hsJs.type = "text/javascript";
+        hsJs.async = true;
+        hsJs.src = "//s10.histats.com/js15_as.js";
+        document.body.appendChild(hsJs);
+      }
+    });
+
   }, [location.pathname]);
 
   return (
@@ -258,48 +282,26 @@ export default function Dashboard() {
           }}
         >
           {location.pathname === "/dashboard" && (
-            <Stack
-              direction={{ xs: "column", md: "row" }}
-              spacing={2}
-              sx={{ mb: 2 }}
-            >
+            <Stack direction={{ xs: "column", md: "row" }} spacing={2} sx={{ mb: 2 }}>
               <Paper sx={{ p: 2, flex: 1, borderRadius: 2 }}>
                 <Typography variant="body2" color="text.secondary">
                   Visits (Total)
                 </Typography>
-                <Typography variant="h5" fontWeight={800}>
-                  {hsLoading ? (
-                    <CircularProgress size={18} />
-                  ) : (
-                    hs?.visitsTotal ?? "-"
-                  )}
-                </Typography>
+                <Box ref={totalRef} id="histats_counter"></Box>
               </Paper>
 
               <Paper sx={{ p: 2, flex: 1, borderRadius: 2 }}>
                 <Typography variant="body2" color="text.secondary">
                   Visits (Today)
                 </Typography>
-                <Typography variant="h5" fontWeight={800}>
-                  {hsLoading ? (
-                    <CircularProgress size={18} />
-                  ) : (
-                    hs?.visitsToday ?? "-"
-                  )}
-                </Typography>
+                <Box ref={todayRef} id="histats_counter"></Box>
               </Paper>
 
               <Paper sx={{ p: 2, flex: 1, borderRadius: 2 }}>
                 <Typography variant="body2" color="text.secondary">
                   Online
                 </Typography>
-                <Typography variant="h5" fontWeight={800}>
-                  {hsLoading ? (
-                    <CircularProgress size={18} />
-                  ) : (
-                    hs?.online ?? "-"
-                  )}
-                </Typography>
+                <Box ref={onlineRef} id="histats_counter"></Box>
               </Paper>
             </Stack>
           )}
