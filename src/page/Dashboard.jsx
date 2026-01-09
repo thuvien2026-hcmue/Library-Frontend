@@ -34,15 +34,6 @@ import Logo from "../assets/image/logo.jpg";
 /* ================= CONSTANTS ================= */
 const SIDEBAR_EXPANDED = 240;
 const SIDEBAR_COLLAPSED = 80;
-const totalRef = useRef(null);
-const todayRef = useRef(null);
-const onlineRef = useRef(null);
-
-const histatsScripts = [
-  { id: "total", ref: totalRef, code: "00011111" },
-  { id: "today", ref: todayRef, code: "00000110" },
-  { id: "online", ref: onlineRef, code: "00000001" },
-];
 
 
 const menuItems = [
@@ -63,7 +54,15 @@ export default function Dashboard() {
   const logout = useLogout();
   const [anchorEl, setAnchorEl] = useState(null);
 
-  // ✅ Histats state MUST be inside component
+  const totalRef = useRef(null);
+  const todayRef = useRef(null);
+  const onlineRef = useRef(null);
+
+  const histatsScripts = [
+    { id: "total", ref: totalRef, code: "00011111" },
+    { id: "today", ref: todayRef, code: "00000110" },
+    { id: "online", ref: onlineRef, code: "00000001" },
+  ];
 
   useEffect(() => {
     if (location.pathname !== "/dashboard") return;
