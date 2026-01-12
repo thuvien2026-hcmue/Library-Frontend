@@ -89,7 +89,7 @@ export default function VanBanPage() {
         mx: "auto",
         px: 2,
         py: 4,
-        mt: 8,
+        mt: 14,
       }}
     >
       <Typography variant="h5" fontWeight={800} mb={2} textAlign="center">

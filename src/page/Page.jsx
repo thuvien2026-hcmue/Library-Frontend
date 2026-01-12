@@ -167,7 +167,7 @@ export default function Page() {
 
     /* ================= RENDER ================= */
     return (
-        <Box sx={{ display: "flex", gap: 3, px: 3, py: 4, maxWidth: 1400, mx: "auto", mt: 14 }}>
+        <Box sx={{ display: "flex", gap: 3, px: 3, py: 4, maxWidth: 1400, mx: "auto", mt: { xs: 8, md: 14 }, }}>
             <Helmet>
                 <title>{title} | HCMUE</title>
             </Helmet>

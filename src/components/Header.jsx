@@ -438,6 +438,17 @@ export default function Header() {
                             </ListItemButton>
                         </ListItem>
 
+                        {/* LIÊN HỆ */}
+                        <ListItem disablePadding>
+                            <ListItemButton
+                                component={RouterLink}
+                                to="/van-ban/van-ban"
+                                onClick={toggleDrawer(false)}
+                            >
+                                <ListItemText primary="Liên hệ" />
+                            </ListItemButton>
+                        </ListItem>
+
                     </List>
 
                     <Divider sx={{ my: 1 }} />

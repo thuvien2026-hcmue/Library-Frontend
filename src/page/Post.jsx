@@ -246,7 +246,7 @@ export default function Post() {
                 maxWidth: 1400,
                 mx: "auto",
                 flexDirection: { xs: "column", md: "row" },
-                mt: { xs: 6, md: 14 },
+                mt: { xs: 8, md: 14 },
             }}
         >
             <Helmet>
