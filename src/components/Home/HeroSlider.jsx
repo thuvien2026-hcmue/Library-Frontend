@@ -46,7 +46,7 @@ export default function HeroSlider({ images }) {
                   src={src}
                   sx={{
                     width: "100%",
-                    height: { xs: 250, sm: 300, md: 500 },
+                    height: { xs: 300, sm: 500, md: 800 },
                     objectFit: "cover",
                     display: "block",
                   }}

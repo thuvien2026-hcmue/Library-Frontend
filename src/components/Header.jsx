@@ -445,7 +445,7 @@ export default function Header() {
                                 to="/van-ban/van-ban"
                                 onClick={toggleDrawer(false)}
                             >
-                                <ListItemText primary="Liên hệ" />
+                                <ListItemText primary="Văn bản" />
                             </ListItemButton>
                         </ListItem>
 
